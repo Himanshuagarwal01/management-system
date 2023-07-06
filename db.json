@@ -1,0 +1,136 @@
+{
+  "laptop": [
+    {
+      "id": 1,
+      "ModelNumber": "15ALC6",
+      "DeviceID": "L9N012C14032",
+      "Processor": "AMD® Ryzen 5 5500u with radeon graphics × 12",
+      "RAM": "8GB",
+      "Storage": "512 GB",
+      "Status": "Available"
+    },
+    {
+      "id": 2,
+      "ModelNumber": "P61G",
+      "DeviceID": "P61G001",
+      "Processor": "Intel core i5 vPro",
+      "RAM": "16 Gb",
+      "Storage": "256 Gb SSD",
+      "Status": "Available"
+    },
+    {
+      "id": 3,
+      "ModelNumber": "15ALC6",
+      "DeviceID": "L9NX12812001",
+      "Processor": "AMD® Ryzen 5 5500u with radeon graphics × 12",
+      "RAM": "8GB",
+      "Storage": "512 GB",
+      "Status": "Available"
+    },
+    {
+      "id": 4,
+      "ModelNumber": "JB6C9H2",
+      "DeviceID": "P61G001",
+      "Processor": "Intel® Core™ i5-7300HQ CPU @ 2.50GHz × 4",
+      "RAM": "15.3 GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available"
+    },
+    {
+      "id": "14",
+      "ModelNumber": "qs12",
+      "DeviceID": "sfd12",
+      "Processor": "dvfgv1213",
+      "RAM": "256",
+      "Storage": "sds",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": "11",
+      "ModelNumber": "qs12",
+      "DeviceID": "sfd12",
+      "Processor": "dvfgv1213",
+      "RAM": "256",
+      "Storage": "sds",
+      "Status": "Available",
+      "AssignedTo": "Assigned"
+    },
+    {
+      "id": "12",
+      "ModelNumber": "ad212",
+      "DeviceID": "sfd12",
+      "Processor": "dvfgv1213",
+      "RAM": "256",
+      "Storage": "sds",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": "78",
+      "ModelNumber": "sdsd",
+      "DeviceID": "sfd12",
+      "Processor": "dvfgv1213",
+      "RAM": "256",
+      "Storage": "sds",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": "15",
+      "ModelNumber": "P61F002",
+      "DeviceID": "L9NX1235V34",
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": "16",
+      "ModelNumber": "P61F002",
+      "DeviceID": "L9NX1235V34",
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 17,
+      "ModelNumber": "P61F002",
+      "DeviceID": "L9NX1235V3445",
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    }
+  ],
+  "Mouse": [
+    {
+      "id": 1,
+      "DeviceID": 11,
+      "Company": "Zebronics",
+      "Status": "Available"
+    },
+    {
+      "id": 2,
+      "DeviceID": 12,
+      "Company": "lenovo",
+      "Status": "Available"
+    },
+    {
+      "id": 3,
+      "DeviceID": 13,
+      "Company": "Zebronics",
+      "Status": "Available"
+    },
+    {
+      "id": 4,
+      "DeviceID": 14,
+      "Company": "Zebronics",
+      "Status": "Available"
+    }
+  ]
+}
