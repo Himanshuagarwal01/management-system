@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 export default function Home() {
+
+  const [list,setList]=useState([])
   const devices = [
     {
       id: 1,
@@ -39,6 +41,11 @@ export default function Home() {
       link:'keyboard'
     },
   ];
+
+// const handleViewDeviceList=()=>{
+// axios.get()
+// }
+
   return (
     <>
       <Box justifyContent="center" sx={{ height: "60vh" }}>

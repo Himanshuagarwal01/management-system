@@ -7,24 +7,28 @@ import {
   Button,
   Autocomplete,
   Divider,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FormikProvider, useFormik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-function Edit({ open, setOpen }) {
+function Edit({ open, setOpen, modalType, data,onChangeSpot,setOnChangeSpot }) {
   const [add, setAdd] = useState([]);
-
+  const [error, setError] = useState("");
+  const [openn, setOpenn] = useState(false);
+  const [list,setList]=useState([])
   const handleClose = () => {
+    resetForm()
     setOpen(false);
   };
-
   const type = window.location.pathname;
   const deviceType = type.split("/")[2];
   const status = [
     {
-      id: 1,
+      id: 1, 
       label: "Available",
     },
     {
@@ -32,15 +36,26 @@ function Edit({ open, setOpen }) {
       label: "Assigned",
     },
   ];
+  const handleClickk = () => {
+    setOpenn(true);
+  };
+
+  const handleClosee = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenn(false);
+  };
   const editValidaitonSchema = Yup.object().shape({
-    id: Yup.number().required("ID is required"),
+    // id: Yup.number().required("ID is required"),
     ModelNumber: Yup.string().required("Model No. is required"),
-    DeviceID: Yup.string().required("Device ID is required"),
+    DeviceID: Yup.number().required("Device ID is required"),
     Processor: Yup.string().required("Processor is required"),
     RAM: Yup.string().required("Please fill this field"),
     Storage: Yup.string().required("Please fill this field"),
-   // Status: Yup.string().required("Please select status"),
-   // AssignedTo: Yup.string().required("please select !!"),
+    Status: Yup.string().required("Please select status"),
+    AssignedTo: Yup.string().required("please select !!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -54,24 +69,42 @@ function Edit({ open, setOpen }) {
       AssignedTo: "",
     },
     validationSchema: editValidaitonSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, { setErrors }) => {
+      console.log("values", values);
       const deviceData = {
-        id: Number(values.id),
+        id: values.id,
         ModelNumber: values.ModelNumber,
-        DeviceID: values.DeviceID,
+        DeviceID: Number(values.DeviceID),
         Processor: values.Processor,
         RAM: values.RAM,
         Storage: values.Storage,
-        Status: values.Status.label,
-        AssignedTo: values.AssignedTo.label,
+        Status: values.Status,
+        AssignedTo: values.AssignedTo,
       };
-      axios
-        .post(`http://localhost:8000/${deviceType}`, deviceData)
-        .then((response) => setAdd(response.data))
-        .catch((error) => console.log(error));
-    
-    handleClose()  },
+      // console.log("deviceData", deviceData);
+
+      const dataID = list.find((x) => x.DeviceID === Number(values.DeviceID))
+     
+      if (!dataID) {
+        axios
+          .post(`http://localhost:8000/${deviceType}`, deviceData)
+          .then((response) => setAdd(response.data))
+          .catch((error) => {  
+            console.log(error);
+          });
+          handleClose()
+          setOnChangeSpot(!onChangeSpot)
+      } else {
+        //setError("This ID is already exists");
+        setError("This ID is already exists");
+            handleClickk();
+        console.log("setError", error);
+        
+        // setErrors({DeviceID:"This ID is already exists"})
+        // console.log("setErrors",setErrors);
+      }
+     // handleClose();
+    },
   });
   const {
     values,
@@ -82,8 +115,17 @@ function Edit({ open, setOpen }) {
     handleBlur,
     setFieldValue,
     getFieldProps,
-    
+    resetForm
   } = formik;
+
+  useEffect(()=>{
+    setList(data)
+    console.log("d1",data)
+    console.log("list",list);
+  },[data])
+  // useEffect(() => {
+  //   setFieldValue("DeviceID", data.length + 1);
+  // }, [data]);
 
   // const addDevice = () => {
   //   axios
@@ -95,9 +137,12 @@ function Edit({ open, setOpen }) {
   console.log("add", add);
 
   console.log("errors", errors);
+  console.log("val", values);
+  console.log("ddd", data.length);
+
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} data={data}>
         <Box
           sx={{
             width: 550,
@@ -118,7 +163,7 @@ function Edit({ open, setOpen }) {
             justifyContent="center"
             sx={{ textTransform: "capitalize" }}
           >
-            {deviceType}
+            {modalType} {deviceType}
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <FormikProvider value={formik}>
@@ -130,14 +175,20 @@ function Edit({ open, setOpen }) {
                 justifyContent="center"
               >
                 <Stack direction="row" spacing={2}>
-                  <TextField
+                  {/* <TextField
                     label="id"
                     name="id"
                     value={values.id}
+                    disabled
+                  /> */}
+                  <TextField
+                    label="Device ID"
+                    name="DeviceID"
+                    value={values.DeviceID}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={Boolean(touched.id && errors.id)}
-                    helperText={Boolean(touched.id && errors.id)}
+                    error={Boolean((touched.DeviceID && errors.DeviceID)||error)}
+                    helperText={(touched.DeviceID && errors.DeviceID)||error}
                   />
                   <TextField
                     label="Model No."
@@ -152,15 +203,6 @@ function Edit({ open, setOpen }) {
                 </Stack>
                 <Stack direction="row" spacing={2}>
                   <TextField
-                    label="Device ID"
-                    name="DeviceID"
-                    value={values.DeviceID}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={Boolean(touched.DeviceID && errors.DeviceID)}
-                    helperText={touched.DeviceID && errors.DeviceID}
-                  />
-                  <TextField
                     label="Processor"
                     name="Processor"
                     value={values.Processor}
@@ -169,8 +211,6 @@ function Edit({ open, setOpen }) {
                     error={Boolean(touched.Processor && errors.Processor)}
                     helperText={touched.Processor && errors.Processor}
                   />
-                </Stack>
-                <Stack direction="row" spacing={2}>
                   <TextField
                     label="RAM"
                     name="RAM"
@@ -180,6 +220,8 @@ function Edit({ open, setOpen }) {
                     error={Boolean(touched.RAM && errors.RAM)}
                     helperText={touched.RAM && errors.RAM}
                   />
+                </Stack>
+                <Stack direction="row" spacing={2}>
                   <TextField
                     label="Storage"
                     name="Storage"
@@ -189,19 +231,20 @@ function Edit({ open, setOpen }) {
                     error={Boolean(touched.Storage && errors.Storage)}
                     helperText={touched.Storage && errors.Storage}
                   />
-                </Stack>
-                <Stack direction="row" spacing={2}>
                   <Autocomplete
-                    options={status?.map((item) => ({
-                      label: item.label,
-                      id: item.id,
-                    }))}
-                    getOptionLabel={option=>option.label}
+                    options={
+                      status?.map((item) => ({
+                        label: item.label,
+                        id: item.id,
+                      })) || []
+                    }
+                    getOptionLabel={(option) => option.label}
                     sx={{ width: 235 }}
                     name="Status"
-                    onChange={(e, value) => setFieldValue("Status", value)}
-                   value={values.Status.label}
-                  
+                    onChange={(e, value) => {
+                      setFieldValue("Status", value?.label);
+                    }}
+                    value={values.Status.label}
                     onBlur={handleBlur}
                     renderInput={(params) => (
                       <TextField
@@ -213,14 +256,20 @@ function Edit({ open, setOpen }) {
                       />
                     )}
                   />
+                </Stack>
+                <Stack direction="row">
                   <Autocomplete
-                    options={status?.map((item) => ({
-                      label: item.label,
-                      id: item.id,
-                    }))}
-                    sx={{ width: 235 }}
+                    options={
+                      status?.map((item) => ({
+                        label: item.label,
+                        id: item.id,
+                      })) || []
+                    }
+                    sx={{ width: 490 }}
                     name="AssignedTo"
-                    onChange={(e, value) => setFieldValue("AssignedTo", value)}
+                    onChange={(e, value) =>
+                      setFieldValue("AssignedTo", value?.label)
+                    }
                     value={values.AssignedTo}
                     renderInput={(params) => (
                       <TextField
@@ -257,7 +306,11 @@ function Edit({ open, setOpen }) {
                     justifyContent: "flex-end",
                   }}
                 >
-                  <Button variant="outlined" sx={{ mr: 2 }}>
+                  <Button
+                    variant="outlined"
+                    sx={{ mr: 2 }}
+                    onClick={handleClose}
+                  >
                     Cancel
                   </Button>
                   <Button type="submit" variant="contained">
@@ -269,8 +322,33 @@ function Edit({ open, setOpen }) {
           </FormikProvider>
         </Box>
       </Modal>
+      <Snackbar open={openn} autoHideDuration={6000} onClose={handleClosee}>
+        <Alert onClose={handleClosee} severity="error" sx={{ width: "100%" }}>
+          {error}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
 
 export default Edit;
+
+// const handleClick = () => {
+//   setOpen(true);
+// };
+
+// const handleClose = (event, reason) => {
+//   if (reason === 'clickaway') {
+//     return;
+//   }
+
+//   setOpen(false);
+// };
+
+{
+  /* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar> */
+}

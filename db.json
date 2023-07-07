@@ -3,7 +3,7 @@
     {
       "id": 1,
       "ModelNumber": "15ALC6",
-      "DeviceID": "L9N012C14032",
+      "DeviceID": 1,
       "Processor": "AMD® Ryzen 5 5500u with radeon graphics × 12",
       "RAM": "8GB",
       "Storage": "512 GB",
@@ -12,7 +12,7 @@
     {
       "id": 2,
       "ModelNumber": "P61G",
-      "DeviceID": "P61G001",
+      "DeviceID": 2,
       "Processor": "Intel core i5 vPro",
       "RAM": "16 Gb",
       "Storage": "256 Gb SSD",
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "ModelNumber": "15ALC6",
-      "DeviceID": "L9NX12812001",
+      "DeviceID": 3,
       "Processor": "AMD® Ryzen 5 5500u with radeon graphics × 12",
       "RAM": "8GB",
       "Storage": "512 GB",
@@ -30,56 +30,26 @@
     {
       "id": 4,
       "ModelNumber": "JB6C9H2",
-      "DeviceID": "P61G001",
+      "DeviceID": 4,
       "Processor": "Intel® Core™ i5-7300HQ CPU @ 2.50GHz × 4",
       "RAM": "15.3 GiB",
       "Storage": "256.1 Gb SSD",
       "Status": "Available"
     },
     {
-      "id": "14",
-      "ModelNumber": "qs12",
-      "DeviceID": "sfd12",
-      "Processor": "dvfgv1213",
-      "RAM": "256",
-      "Storage": "sds",
-      "Status": "Available",
-      "AssignedTo": "Available"
-    },
-    {
-      "id": "11",
-      "ModelNumber": "qs12",
-      "DeviceID": "sfd12",
-      "Processor": "dvfgv1213",
-      "RAM": "256",
-      "Storage": "sds",
-      "Status": "Available",
-      "AssignedTo": "Assigned"
-    },
-    {
-      "id": "12",
-      "ModelNumber": "ad212",
-      "DeviceID": "sfd12",
-      "Processor": "dvfgv1213",
-      "RAM": "256",
-      "Storage": "sds",
-      "Status": "Available",
-      "AssignedTo": "Available"
-    },
-    {
-      "id": "78",
-      "ModelNumber": "sdsd",
-      "DeviceID": "sfd12",
-      "Processor": "dvfgv1213",
-      "RAM": "256",
-      "Storage": "sds",
-      "Status": "Available",
-      "AssignedTo": "Available"
-    },
-    {
-      "id": "15",
+      "id": 5,
       "ModelNumber": "P61F002",
-      "DeviceID": "L9NX1235V34",
+      "DeviceID": 6,
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.3 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 7,
+      "ModelNumber": "P61F002",
+      "DeviceID": 7,
       "Processor": "Intel Core",
       "RAM": "15.1GiB",
       "Storage": "256.1 Gb SSD",
@@ -87,9 +57,9 @@
       "AssignedTo": "Available"
     },
     {
-      "id": "16",
+      "id": 8,
       "ModelNumber": "P61F002",
-      "DeviceID": "L9NX1235V34",
+      "DeviceID": 10,
       "Processor": "Intel Core",
       "RAM": "15.1GiB",
       "Storage": "256.1 Gb SSD",
@@ -97,9 +67,49 @@
       "AssignedTo": "Available"
     },
     {
-      "id": 17,
+      "id": 9,
       "ModelNumber": "P61F002",
-      "DeviceID": "L9NX1235V3445",
+      "DeviceID": 11,
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 10,
+      "ModelNumber": "P61F002",
+      "DeviceID": 15,
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 11,
+      "ModelNumber": "P61F002",
+      "DeviceID": 17,
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Available",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 12,
+      "ModelNumber": "P61F002",
+      "DeviceID": 18,
+      "Processor": "Intel Core",
+      "RAM": "15.1GiB",
+      "Storage": "256.1 Gb SSD",
+      "Status": "Assigned",
+      "AssignedTo": "Available"
+    },
+    {
+      "id": 13,
+      "ModelNumber": "P61F008",
+      "DeviceID": 20,
       "Processor": "Intel Core",
       "RAM": "15.1GiB",
       "Storage": "256.1 Gb SSD",

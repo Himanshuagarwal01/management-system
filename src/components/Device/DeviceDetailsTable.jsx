@@ -14,18 +14,20 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Edit from "./Edit";
 function DeviceDetailsTable() {
-  const params = useParams();
+  const {id} = useParams();
   const type = window.location.pathname;
   const deviceType = type.split("/")[2];
   console.log(type);
-  console.log("params", params);
   const [tableHead, setTableHead] = useState([]);
   const [tableBody, setTableBody] = useState([]);
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [onChangeSpot, setOnChangeSpot] = useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (type) => {
     setOpen(true);
+    setModalType(type);
   };
   const color = [
     {
@@ -58,13 +60,26 @@ function DeviceDetailsTable() {
   //     Status: "Available",
   //   },
   // ];
+  // const handleDelete = () => {
+  //   const dataID = data.find((x) => x.id===id);
+  //   if (dataID) {
+  //     axios
+  //       .delete(`http://localhost:8000/${deviceType}`)
+  //       .then((response) => {console.log(response);
+  //         // setData(response.data)
+  //       setData.filter((y)=>y.id!==dataID)
+        
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/${deviceType}`)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [onChangeSpot]);
   useEffect(() => {
     if (type.includes("laptop")) {
       setTableHead(laptop1);
@@ -76,7 +91,7 @@ function DeviceDetailsTable() {
     }
   }, [data]);
   console.log(tableHead);
-
+  console.log("dataa", data);
   return (
     <>
       <Box sx={{ display: "flex", width: "100%" }}>
@@ -88,7 +103,7 @@ function DeviceDetailsTable() {
           {deviceType}
         </Typography>
         <Button
-          onClick={handleOpen}
+          onClick={() => handleOpen("Add")}
           variant="contained"
           sx={{ alignContent: "flex-end", justifyContent: "flex-end" }}
         >
@@ -117,7 +132,7 @@ function DeviceDetailsTable() {
             {deviceType === "laptop"
               ? tableBody?.map((x, index) => (
                   <TableRow key={x.id}>
-                    <TableCell>{x.id}</TableCell>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell>{x.ModelNumber}</TableCell>
                     <TableCell>{x.DeviceID}</TableCell>
                     <TableCell>{x.Processor}</TableCell>
@@ -126,16 +141,13 @@ function DeviceDetailsTable() {
                     <TableCell>{x.Status}</TableCell>
                     <TableCell>
                       <Button
-                        onClick={handleOpen}
+                        onClick={() => handleOpen("Edit")}
                         variant="outlined"
                         sx={{ mr: "7px" }}
                       >
                         Edit
                       </Button>{" "}
-                      <Button
-                        variant="outlined"
-                        sx={{ borderColor: "#ff0000", color: "#ff0000" }}
-                      >
+                      <Button variant="outlined" color="error">
                         Delete
                       </Button>
                     </TableCell>
@@ -150,7 +162,7 @@ function DeviceDetailsTable() {
                     <TableCell>{y.Status}</TableCell>
                     <TableCell>
                       <Button
-                        onClick={handleOpen}
+                        onClick={() => handleOpen("Edit")}
                         variant="outlined"
                         sx={{ mr: "7px" }}
                       >
@@ -158,7 +170,8 @@ function DeviceDetailsTable() {
                       </Button>{" "}
                       <Button
                         variant="outlined"
-                        sx={{ borderColor: "#ff0000", color: "#ff0000" }}
+                        color="error"
+                        onClick={handleDelete}
                       >
                         Delete
                       </Button>
@@ -169,7 +182,15 @@ function DeviceDetailsTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Edit open={open} setOpen={setOpen} />
+      <Edit
+        open={open}
+        setOpen={setOpen}
+        modalType={modalType}
+        setModalType={setModalType}
+        data={data}
+        onChangeSpot={onChangeSpot}
+        setOnChangeSpot={setOnChangeSpot}
+      />
     </>
   );
 }
